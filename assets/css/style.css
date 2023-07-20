@@ -1,0 +1,103 @@
+@font-face {
+    font-family: DMSans-B;
+    src: url('../fonts/DMSans-Bold.otf');
+}
+
+@font-face {
+    font-family: DMSans-M;
+    src: url('../fonts/DMSans-Medium.otf');
+}
+
+@font-face {
+    font-family: DMSans-R;
+    src: url('../fonts/DMSans-Regular.otf');
+}
+
+@font-face {
+    font-family: Noto-Black;
+    src: url('../fonts/NotoSansTC-Black.otf');
+}
+
+@font-face {
+    font-family: Noto-Bold;
+    src: url('../fonts/NotoSansTC-Bold.otf');
+}
+
+@font-face {
+    font-family: Noto-Medium;
+    src: url('../fonts/NotoSansTC-Medium.otf');
+}
+
+@font-face {
+    font-family: Noto-Regular;
+    src: url('../fonts/NotoSansTC-Regular.otf');
+}
+
+@font-face {
+    font-family: Xxx;
+    src: url('../fonts/XXIX.otf');
+}
+
+/*log in page css*/
+.login-body{
+    background-image: url("../images/login/BG.webp");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+.login-logo{
+    margin-top: 25%;
+}
+
+.login-heading{
+    font-family: Xxx, sans-serif;
+    color: #ffffff;
+    font-size: 41px;
+}
+
+.login-form{
+    margin: 0 35px;
+}
+
+.login-form input{
+    border: 2px solid #b6c2c9;
+    border-radius: 18px;
+    background-image: url(../images/login/rectangular.webp);
+    background-color: transparent;
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: DMSans-R,sans-serif;
+    padding: 10px;
+    font-size: 11px;
+}
+
+.login-form input::placeholder{
+    color: #ffffff;
+    font-family:  DMSans-R,sans-serif;
+    font-size: 11px;
+}
+
+.forget-pass{
+    font-size: 13px;
+    color: #3e2b8f;
+    font-family: DMSans-R,sans-serif;
+}
+
+.horizontal-lines {
+    display: flex;
+    align-items: center;
+}
+
+.line {
+    flex: 1;
+    height: 1px;
+    background-color: #ffffff; /* Set the color of the horizontal lines */
+}
+
+.or-text {
+    margin: 0 10px; /* Adjust the spacing between "or" and the lines */
+}
