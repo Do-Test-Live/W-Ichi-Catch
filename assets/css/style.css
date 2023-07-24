@@ -101,3 +101,89 @@
 .or-text {
     margin: 0 10px; /* Adjust the spacing between "or" and the lines */
 }
+
+
+/*home page style*/
+.home-body{
+    background-image: url("../images/homepage/main-bg.webp");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+.navbar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #ffffff;
+    color: white;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+}
+
+.icon {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+}
+
+.icon i {
+    font-size: 25px;
+    color: #97c8d7;
+}
+
+.center-icon {
+    flex: 2;
+    text-align: center;
+    padding: 0;
+}
+
+.center-icon img {
+    width: 70px; /* Adjust the size of the center icon */
+    height: 75px; /* Adjust the size of the center icon */
+    border-radius: 50%;
+}
+
+.head-banner{
+    background-color: #ffffff;
+}
+.grab-btn{
+    background-image: url("../images/homepage/grab-button.webp");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 120px;
+    height: 80px;
+}
+
+.home-text-section{
+    padding: 20px;
+    background-image: url("../images/homepage/rectangular.webp");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    font-family: DMSans-R,sans-serif;
+}
+
+.home-text-section h2{
+    font-family: XXIX, sans-serif;
+    color: #5d4ba8;
+    padding: 0 20px;
+    background: #f27843;
+    border-radius: 20px;
+}
+
+.home-text-section p{
+    padding-left: 20px;
+    color: #5d4ba8;
+    font-size: 15px;
+}
+.before-footer{
+    height: 100px;
+}
+
