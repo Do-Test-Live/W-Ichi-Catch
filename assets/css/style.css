@@ -39,7 +39,7 @@
 }
 
 /*log in page css*/
-.login-body{
+.login-body {
     background-image: url("../images/login/BG.webp");
     background-size: cover;
     background-repeat: no-repeat;
@@ -49,42 +49,42 @@
     padding: 0;
 }
 
-.login-logo{
+.login-logo {
     margin-top: 25%;
 }
 
-.login-heading{
+.login-heading {
     font-family: Xxx, sans-serif;
     color: #ffffff;
     font-size: 41px;
 }
 
-.login-form{
+.login-form {
     margin: 0 35px;
 }
 
-.login-form input{
+.login-form input {
     border: 2px solid #b6c2c9;
     border-radius: 18px;
     background-image: url(../images/login/rectangular.webp);
     background-color: transparent;
     background-size: cover;
     background-repeat: no-repeat;
-    font-family: DMSans-R,sans-serif;
+    font-family: DMSans-R, sans-serif;
     padding: 10px;
     font-size: 11px;
 }
 
-.login-form input::placeholder{
+.login-form input::placeholder {
     color: #ffffff;
-    font-family:  DMSans-R,sans-serif;
+    font-family: DMSans-R, sans-serif;
     font-size: 11px;
 }
 
-.forget-pass{
+.forget-pass {
     font-size: 13px;
     color: #3e2b8f;
-    font-family: DMSans-R,sans-serif;
+    font-family: DMSans-R, sans-serif;
 }
 
 .horizontal-lines {
@@ -104,7 +104,7 @@
 
 
 /*home page style*/
-.home-body{
+.home-body {
     background-image: url("../images/homepage/main-bg.webp");
     background-size: cover;
     background-repeat: no-repeat;
@@ -113,6 +113,7 @@
     margin: 0;
     padding: 0;
 }
+
 .navbar {
     display: flex;
     justify-content: space-around;
@@ -153,10 +154,11 @@
     border-radius: 50%;
 }
 
-.head-banner{
+.head-banner {
     background-color: #ffffff;
 }
-.grab-btn{
+
+.grab-btn {
     background-image: url("../images/homepage/grab-button.webp");
     background-size: cover;
     background-repeat: no-repeat;
@@ -165,16 +167,17 @@
     height: 80px;
 }
 
-.home-text-section{
+.home-text-section {
     padding: 20px;
     background-image: url("../images/homepage/rectangular.webp");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    font-family: DMSans-R,sans-serif;
+    font-family: DMSans-R, sans-serif;
+    border-radius: 30px;
 }
 
-.home-text-section h2{
+.home-text-section h2 {
     font-family: XXIX, sans-serif;
     color: #5d4ba8;
     padding: 0 20px;
@@ -182,12 +185,119 @@
     border-radius: 20px;
 }
 
-.home-text-section p{
+.home-text-section p {
     padding-left: 20px;
     color: #5d4ba8;
     font-size: 15px;
 }
-.before-footer{
+
+.before-footer {
     height: 100px;
 }
 
+
+/*intro page css*/
+.intro-header {
+    background-image: url("../images/membership/button.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.intro-header h2 {
+    padding: 4px;
+    font-family: XXIX, sans-serif;
+    margin-top: 0.5rem;
+    color: #5d4ba8;
+}
+
+.intro-text-section {
+    background-image: url("../images/intro/content-bg.webp");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 30px;
+}
+
+.intro-text-section h4 {
+    font-family: XXIX, sans-serif;
+    color: #5d4ba8;
+}
+
+.intro-text-section p {
+    color: #5d4ba8;
+    font-family: DMSans-M, sans-serif;
+}
+
+
+/*membership page*/
+.membership-section {
+    background-image: url("../images/intro/content-bg.webp");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 30px;
+}
+
+.membership-section a {
+    text-decoration: underline;
+    color: #ffffff;
+    font-family: DMSans-B, sans-serif;
+}
+
+#chart {
+    height: 280px;
+    width: 280px;
+    margin-left: -20px;
+}
+
+.second-section {
+    background: #7e67f7;
+    margin: -50px 5px 0 5px;
+    padding: 25px 0;
+    border-radius: 30px;
+}
+
+.second-section p{
+    font-family: DMSans-M, sans-serif;
+    color: #ffffff;
+    font-size: 15px;
+}
+
+.second-section h4{
+    font-family: XXIX, sans-serif;
+    color: #ffb178;
+    font-size: 18px;
+}
+
+.badge{
+    border: 1px solid #ffffff;
+    border-radius: 10px;
+    font-size: 8px;
+}
+
+.membership-title{
+    background-image: url("../images/membership/rounded01.webp");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.membership-title h4{
+    font-family: XXIX, sans-serif;
+    color: #ffffff;
+    margin-bottom: 0;
+    padding: 10px;
+}
+
+.description{
+    color: #5d4ba8;
+    font-family: DMSans-M, sans-serif;
+}
+
+.side-section{
+    bottom: -80px;
+    position: relative;
+    font-family: DMSans-M, sans-serif;
+    margin-right: -10px;
+}
