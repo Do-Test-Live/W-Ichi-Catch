@@ -1,3 +1,15 @@
+<?php
+session_start();
+require_once('include/dbController.php');
+$db_handle = new DBController();
+date_default_timezone_set("Asia/Hong_Kong");
+if (!isset($_SESSION['userid'])) {
+    header("Location: index.php");
+}
+$userId = $_SESSION['userid'];
+
+$fetch_user = $db_handle->runQuery("select * from customer where id = '$userId'");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +24,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
           integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
-    <!--<script src="assets/js/custom.js"></script>-->
+    <link href="assets/js/toastr/css/toastr.min.css" rel="stylesheet" type="text/css"/>
+    <script src="assets/js/custom.js"></script>
 </head>
 <body class="home-body">
 <div class="navbar">
@@ -62,7 +75,9 @@
 
 </div>
 
-
+<script src="assets/js/jQuery/jquery-3.6.4.min.js"></script>
+<script src="assets/js/toastr/js/toastr.min.js" type="text/javascript"></script>
+<script src="assets/js/toastr-init.js" type="text/javascript"></script>
 <script src="assets/js/bootstrap.bundle.min.js"></script>
 
 </body>
