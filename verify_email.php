@@ -3,21 +3,25 @@ session_start();
 require_once ('include/dbController.php');
 $db_handle = new DBController();
 date_default_timezone_set("Asia/Hong_Kong");
-if(isset($_POST['login'])){
-    $email = $db_handle->checkValue(strtolower($_POST['email']));
-    $password = $db_handle->checkValue($_POST['password']);
-    $log_in = $db_handle->runQuery("select * from customer where email = '$email' and password = '$password'");
-    $log_in_no = $db_handle->numRows("select * from customer where email = '$email' and password = '$password'");
-    if($log_in_no == 1){
-        $_SESSION['userid'] = $log_in[0]["id"];
+if(isset($_POST['verify_email'])){
+    $vcode = $db_handle->checkValue(strtolower($_POST['vcode']));
+    $email = $_GET['email'];
+    $verification = $_SESSION['vcode'];
+
+    if($vcode == $verification){
+        session_destroy();
+        session_unset();
+        $fetch_customer = $db_handle -> runQuery("select * from customer where email = '$email'");
+        session_start();
+        $_SESSION['userid'] = $fetch_customer [0]["id"];
         echo "<script>
-                document.cookie = 'alert = 1;';
-                window.location.href='home.php';
+                alert('Please set a new password to continue your session!');
+                window.location.href='setpass.php';
                 </script>";
     } else{
         echo "<script>
-                document.cookie = 'alert = 5;';
-                window.location.href='index.php';
+                alert('Sorry! Can not verify your email.);
+                window.location.href='forgetpass.php';
                 </script>";
     }
 }
@@ -50,30 +54,13 @@ if(isset($_POST['login'])){
 
         <form class="login-form" action="#" method="post">
             <div class="mb-3">
-                <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Email or Usename" name="email">
-            </div>
-            <div class="mb-3">
-                <input type="password" class="form-control" aria-describedby="emailHelp" name="password">
+                <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="6 digit code" name="vcode">
             </div>
             <div class="row">
-                <button type="submit" class="btn" name="login"><img src="assets/images/login/login-button.webp" class="img-fluid">
+                <button type="submit" class="btn" name="verify_email"><img src="assets/images/ve-button.png" class="img-fluid">
                 </button>
             </div>
         </form>
-        <div class="row text-center mt-3">
-            <a href="forgetpass.php" class="forget-pass">Forget Password</a>
-        </div>
-        <div class="row text-center mt-3">
-            <div class="horizontal-lines">
-                <span class="line"></span>
-                <span class="or-text">OR</span>
-                <span class="line"></span>
-            </div>
-        </div>
-        <div class="row mt-3">
-            <a href="signup.php" class="btn"><img src="assets/images/login/create-account.webp" class="img-fluid">
-            </a>
-        </div>
     </div>
 
 </section>

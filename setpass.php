@@ -3,20 +3,22 @@ session_start();
 require_once ('include/dbController.php');
 $db_handle = new DBController();
 date_default_timezone_set("Asia/Hong_Kong");
-if(isset($_POST['login'])){
-    $email = $db_handle->checkValue(strtolower($_POST['email']));
+if(isset($_SESSION['userid'])){
+    $userid = $_SESSION['userid'];
+}
+if(isset($_POST['update_pass'])){
     $password = $db_handle->checkValue($_POST['password']);
-    $log_in = $db_handle->runQuery("select * from customer where email = '$email' and password = '$password'");
-    $log_in_no = $db_handle->numRows("select * from customer where email = '$email' and password = '$password'");
-    if($log_in_no == 1){
-        $_SESSION['userid'] = $log_in[0]["id"];
+    $update_pass = $db_handle->insertQuery("UPDATE `customer` SET `password` = '$password' WHERE id = '$userid'");
+    if($update_pass){
         echo "<script>
-                document.cookie = 'alert = 1;';
+                alert('Password updated successfully!');
                 window.location.href='home.php';
                 </script>";
     } else{
+        session_destroy();
+        session_unset();
         echo "<script>
-                document.cookie = 'alert = 5;';
+                alert('Something went wrong!');
                 window.location.href='index.php';
                 </script>";
     }
@@ -50,30 +52,14 @@ if(isset($_POST['login'])){
 
         <form class="login-form" action="#" method="post">
             <div class="mb-3">
-                <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Email or Usename" name="email">
-            </div>
-            <div class="mb-3">
                 <input type="password" class="form-control" aria-describedby="emailHelp" name="password">
             </div>
             <div class="row">
-                <button type="submit" class="btn" name="login"><img src="assets/images/login/login-button.webp" class="img-fluid">
+                <button type="submit" class="btn" name="update_pass"><img src="assets/images/up-button.png" class="img-fluid">
                 </button>
             </div>
         </form>
-        <div class="row text-center mt-3">
-            <a href="forgetpass.php" class="forget-pass">Forget Password</a>
-        </div>
-        <div class="row text-center mt-3">
-            <div class="horizontal-lines">
-                <span class="line"></span>
-                <span class="or-text">OR</span>
-                <span class="line"></span>
-            </div>
-        </div>
-        <div class="row mt-3">
-            <a href="signup.php" class="btn"><img src="assets/images/login/create-account.webp" class="img-fluid">
-            </a>
-        </div>
+
     </div>
 
 </section>
