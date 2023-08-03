@@ -5,47 +5,50 @@ require 'SMTP.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
+
 $mail = new PHPMailer();
 
 session_start();
-require_once ('include/dbController.php');
+require_once('include/dbController.php');
 $db_handle = new DBController();
 date_default_timezone_set("Asia/Hong_Kong");
-if(isset($_POST['verify'])){
+if (isset($_POST['verify'])) {
     $email = $db_handle->checkValue(strtolower($_POST['email']));
     $check_customer = $db_handle->numRows("select * from customer where email = '$email'");
-if($check_customer == 1){
-    function generateVerificationCode() {
-        // Define the character set for the verification code
-        $charset = '0123456789';
-        $code_length = 6;
-        $code = '';
+    if ($check_customer == 1) {
+        function generateVerificationCode()
+        {
+            // Define the character set for the verification code
+            $charset = '0123456789';
+            $code_length = 6;
+            $code = '';
 
-        // Generate the verification code
-        for ($i = 0; $i < $code_length; $i++) {
-            $random_index = rand(0, strlen($charset) - 1);
-            $code .= $charset[$random_index];
+            // Generate the verification code
+            for ($i = 0; $i < $code_length; $i++) {
+                $random_index = rand(0, strlen($charset) - 1);
+                $code .= $charset[$random_index];
+            }
+
+            return $code;
         }
 
-        return $code;
-    }
-    $verification_code = generateVerificationCode();
-    $_SESSION['vcode'] = $verification_code;
-    $email_to = $email;
-    $mail->isSMTP();
-    $mail->Host = 'mail.ngt.hk';  // Specify your SMTP server
-    $mail->SMTPAuth = true;
-    $mail->Username = 'ichicatcher@ngt.hk';
-    $mail->Password = '2K%Iw$^)fb18';
-    $mail->Port = 465;  // Specify the SMTP port
-    $mail->SMTPSecure = 'ssl';  // Enable encryption, 'ssl' also possible
+        $verification_code = generateVerificationCode();
+        $_SESSION['vcode'] = $verification_code;
+        $email_to = $email;
+        $mail->isSMTP();
+        $mail->Host = 'mail.ngt.hk';  // Specify your SMTP server
+        $mail->SMTPAuth = true;
+        $mail->Username = 'ichicatcher@ngt.hk';
+        $mail->Password = '&@~(C16kb^3*';
+        $mail->Port = 465;  // Specify the SMTP port
+        $mail->SMTPSecure = 'ssl';  // Enable encryption, 'ssl' also possible
 
-    // Email content
-    $mail->setFrom('verify@ichi-catcher.com', 'Ichi Catcher');
-    $mail->addAddress($email_to);  // Add recipient email
-    $mail->Subject = 'Verify your email.';
-    $mail->isHTML(true);
-    $mail->Body = "
+        // Email content
+        $mail->setFrom('ichicatcher@ngt.hk', 'Ichi Catcher');
+        $mail->addAddress($email_to);  // Add recipient email
+        $mail->Subject = 'Verify your email.';
+        $mail->isHTML(true);
+        $mail->Body = "
             <html>
                 <body style='background-color: #eee; font-size: 16px;'>
                 <div style='max-width: 600px; min-width: 200px; background-color: #ffffff; padding: 20px; margin: auto;'>
@@ -59,25 +62,22 @@ if($check_customer == 1){
                 </body>
             </html>";
 
-    // Send the email
-    if ($mail->send()) {
-        echo "<script>
+        // Send the email
+        if ($mail->send()) {
+            echo "<script>
 alert('An email with verification code has sent to your email');
 window.location.href = 'verify_email.php?email=$email';
 </script>";
-        exit;
+            exit;
+        } else {
+            echo "Something went wrong: " . $mail->ErrorInfo;
+        }
     } else {
-        echo "Something went wrong: " . $mail->ErrorInfo;
-    }
-} else{
-    echo "<script>
+        echo "<script>
 alert('Sorry! This email is not found in our server');
 window.location.href = 'forgetpass.php';
 </script>";
-}
-
-
-
+    }
 }
 ?>
 <!doctype html>
@@ -108,10 +108,12 @@ window.location.href = 'forgetpass.php';
 
         <form class="login-form" action="#" method="post">
             <div class="mb-3">
-                <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Email or Usename" name="email" required>
+                <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Email or Usename"
+                       name="email" required>
             </div>
             <div class="row">
-                <button type="submit" class="btn" name="verify"><img src="assets/images/svc-button.png" class="img-fluid">
+                <button type="submit" class="btn" name="verify"><img src="assets/images/svc-button.png"
+                                                                     class="img-fluid">
                 </button>
             </div>
         </form>
@@ -123,7 +125,6 @@ window.location.href = 'forgetpass.php';
 <script src="assets/js/toastr/js/toastr.min.js" type="text/javascript"></script>
 <script src="assets/js/toastr-init.js" type="text/javascript"></script>
 <script src="assets/js/bootstrap.bundle.min.js"></script>
-
 
 
 </body>

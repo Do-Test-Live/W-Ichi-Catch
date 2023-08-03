@@ -53,7 +53,7 @@ $fetch_user = $db_handle->runQuery("select * from customer where id = '$userId'"
     </div>
     <div class="row">
         <div class="col-12">
-            <img src="assets/images/homepage/img01.webp" class="img-fluid">
+            <img src="assets/images/homepage/img01.png" class="img-fluid">
         </div>
     </div>
     <div class="row flex align-items-center justify-content-center" style="margin-top: -90px;">

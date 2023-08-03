@@ -3,6 +3,13 @@ session_start();
 require_once ('include/dbController.php');
 $db_handle = new DBController();
 date_default_timezone_set("Asia/Hong_Kong");
+
+if(isset($_SESSION['userid'])){
+    echo "
+    <script>
+    window.location.href = 'home.php';
+</script>";
+}
 if(isset($_POST['login'])){
     $email = $db_handle->checkValue(strtolower($_POST['email']));
     $password = $db_handle->checkValue($_POST['password']);
