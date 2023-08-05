@@ -77,7 +77,7 @@ if(isset($_POST['login'])){
                 <span class="line"></span>
             </div>
         </div>
-        <div class="row mt-3">
+        <div class="row mt-3 ps-4 pe-4">
             <a href="signup.php" class="btn"><img src="assets/images/login/create-account.webp" class="img-fluid">
             </a>
         </div>

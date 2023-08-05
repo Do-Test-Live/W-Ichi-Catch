@@ -86,13 +86,13 @@ if (x == 3) {
 }
 
 if (x == 4) {
-    toastr.success("Your Request Has been Successful", "Successful", {
+    toastr.success("Your Payment Has been Successful", "Successful", {
         timeOut: 3000,
         closeButton: !0,
         debug: !1,
         newestOnTop: !0,
         progressBar: !0,
-        positionClass: "toast-bottom-right",
+        positionClass: "toast-top-right",
         preventDuplicates: !0,
         onclick: null,
         showDuration: "300",
@@ -102,7 +102,7 @@ if (x == 4) {
         hideEasing: "linear",
         showMethod: "fadeIn",
         hideMethod: "fadeOut",
-        iconClass: "toast-error",
+        iconClass: "toast-success",
         tapToDismiss: !1
     })
 

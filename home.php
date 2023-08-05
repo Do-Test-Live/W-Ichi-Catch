@@ -71,8 +71,20 @@ if(isset($_SESSION['userid'])){
             <img src="assets/images/homepage/img01.png" class="img-fluid">
         </div>
     </div>
-    <div class="row flex align-items-center justify-content-center" style="margin-top: -90px;">
+    <div class="row flex align-items-center justify-content-center" style="margin-top: -150px;">
         <button class="btn grab-btn"></button>
+    </div>
+    <div class="row flex align-items-center justify-content-center" style="margin-top: -90px;">
+        <button class="btn grab"><?php
+            if(isset($_SESSION['userid'])){
+                $fetch_grab = $db_handle->runQuery("SELECT * FROM `grab` WHERE customer_id = '$userId'");
+                $no_fetch_grab = $db_handle->numRows("SELECT * FROM `grab` WHERE customer_id = '$userId'");
+                if($no_fetch_grab > 0)
+                echo $fetch_grab[0]['grab'];
+                else
+                    echo '00';
+            } else echo '00';
+            ?></button>
     </div>
     <div class="container home-text-section mt-3 pt-5 pb-5">
         <div class="col-12">
@@ -111,7 +123,7 @@ if(isset($_SESSION['userid'])){
                             <h5 class="price-quantity">10 夾</h5>
                             <p class="price-details">HK$ 69.99</p>
                         </div>
-                        <img src="assets/images/price/1.webp" alt="">
+                        <img src="assets/images/price/2.webp" alt="">
                     </div>
                 </a>
             </div>
@@ -122,7 +134,7 @@ if(isset($_SESSION['userid'])){
                             <h5 class="price-quantity">30 夾</h5>
                             <p class="price-details">HK$ 179.99</p>
                         </div>
-                        <img src="assets/images/price/1.webp" alt="">
+                        <img src="assets/images/price/3.webp" alt="">
                     </div>
                 </a>
             </div>
@@ -133,7 +145,7 @@ if(isset($_SESSION['userid'])){
                             <h5 class="price-quantity">50 夾</h5>
                             <p class="price-details">HK$ 249.99</p>
                         </div>
-                        <img src="assets/images/price/1.webp" alt="">
+                        <img src="assets/images/price/4.webp" alt="">
                     </div>
                 </a>
             </div>

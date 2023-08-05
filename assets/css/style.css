@@ -172,7 +172,18 @@
     width: 120px;
     height: 80px;
 }
-
+.grab {
+    background-image: url("../images/homepage/grab.webp");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 120px;
+    height: 80px;
+    margin-top: 80px;
+    font-family: Noto-Bold, sans-serif;
+    color: #5d4ba8;
+    font-size: 20px;
+}
 .home-text-section {
     padding: 20px;
     background-image: url("../images/homepage/rectangular.webp");

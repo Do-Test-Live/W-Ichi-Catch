@@ -2,6 +2,7 @@
 session_start();
 require_once("include/dbController.php");
 $db_handle = new DBController();
+date_default_timezone_set("Asia/Hong_Kong");
 // Include configuration file
 require_once 'config.php';
 
@@ -90,9 +91,9 @@ if (!empty($_GET['session_id'])) {
                     if (!empty($prevRow)) {
                         $payment_id = $prevRow['id'];
                     } else {
-                        if(!isset($_SESSION['userid'])){
+                        if (!isset($_SESSION['userid'])) {
                             $user_id = 0;
-                        } else{
+                        } else {
                             $user_id = $_SESSION['userid'];
                         }
                         // Insert transaction data into the database
@@ -123,11 +124,48 @@ if (!empty($_GET['session_id'])) {
 }
 ?>
 
-<?php if ($statusMsg=="Your Payment has been Successful!") {
-    echo "
+<?php if ($statusMsg == "Your Payment has been Successful!") {
+    $inserted_at = date("Y-m-d H:i:s");
+    if ($paidAmount == 39.99) {
+        $grab = 5;
+    } elseif ($paidAmount == 69.99) {
+        $grab = 10;
+    } elseif ($paidAmount == 179.99) {
+        $grab = 30;
+    } elseif ($paidAmount == 249.99) {
+        $grab = 50;
+    }
+    if ($user_id == 0) {
+        $insert_grab = $db_handle->insertQuery("INSERT INTO `grab`(`customer_id`, `grab`, `inserted_at`) VALUES ('$user_id','$grab','$inserted_at')");
+        echo "
     <script>
-    alert('Payment Completed!');
+    document.cookie = 'alert = 4;';
     window.location.href = 'home.php';
 </script>
     ";
+    } else {
+        $fetch_grab = $db_handle->runQuery("SELECT grab FROM `grab` WHERE customer_id = '$user_id'");
+        $no_fetch_grab = $db_handle->numRows("SELECT grab FROM `grab` WHERE customer_id = '$user_id'");
+        if ($no_fetch_grab > 0) {
+            $grab_pre = $fetch_grab [0]['grab'];
+            $grab_new = $grab_pre + $grab;
+            $update_grab = $db_handle->insertQuery("UPDATE `grab` SET `grab`='$grab_new',`updated_at`='$inserted_at' WHERE customer_id = '$user_id'");
+            if ($update_grab) {
+                echo "
+    <script>
+    document.cookie = 'alert = 4;';
+    window.location.href = 'home.php';
+</script>
+    ";
+            }
+        } else {
+            $insert_grab = $db_handle->insertQuery("INSERT INTO `grab`(`customer_id`, `grab`, `inserted_at`) VALUES ('$user_id','$grab','$inserted_at')");
+            echo "
+    <script>
+    document.cookie = 'alert = 4;';
+    window.location.href = 'home.php';
+</script>
+    ";
+        }
+    }
 }
