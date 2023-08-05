@@ -23,3 +23,9 @@ define('DB_USERNAME', 'root');
 define('DB_PASSWORD', '');
 define('DB_NAME', 'ichicatcher');
 
+
+/*define('DB_HOST', 'localhost');
+define('DB_USERNAME', 'uamwhmiilubhs');
+define('DB_PASSWORD', '3}33m1^$@$b$');
+define('DB_NAME', 'dbnc14kslqwk4b');*/
+

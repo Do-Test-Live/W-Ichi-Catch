@@ -71,6 +71,9 @@ if(isset($_POST['login'])){
             <a href="forgetpass.php" class="forget-pass">Forget Password</a>
         </div>
         <div class="row text-center mt-3">
+            <a href="home.php" class="forget-pass">Back To Home</a>
+        </div>
+        <div class="row text-center mt-3">
             <div class="horizontal-lines">
                 <span class="line"></span>
                 <span class="or-text">OR</span>

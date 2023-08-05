@@ -44,11 +44,11 @@ if(isset($_SESSION['userid'])){
 </head>
 <body class="home-body">
 <div class="navbar">
-    <a href="home.html" class="icon"><i class="fa-solid fa-house"></i></a>
+    <a href="home.php" class="icon"><i class="fa-solid fa-house"></i></a>
     <a href="intro.html" class="icon"><i class="fa-solid fa-magnifying-glass"></i></a>
     <a href="steps.html" class="center-icon"><img src="assets/images/homepage/add-button.png" alt="Icon 3"></a>
     <a href="membership.html" class="icon"><i class="fa-solid fa-gamepad"></i></a>
-    <a href="index.html" class="icon"><i class="fa-solid fa-user"></i></a>
+    <a href="index.php" class="icon"><i class="fa-solid fa-user"></i></a>
 </div>
 
 <div class="container-fluid">
