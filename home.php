@@ -3,12 +3,11 @@ session_start();
 require_once('include/dbController.php');
 $db_handle = new DBController();
 date_default_timezone_set("Asia/Hong_Kong");
-if (!isset($_SESSION['userid'])) {
-    header("Location: index.php");
-}
-$userId = $_SESSION['userid'];
 
-$fetch_user = $db_handle->runQuery("select * from customer where id = '$userId'");
+if(isset($_SESSION['userid'])){
+    $userId = $_SESSION['userid'];
+    $fetch_user = $db_handle->runQuery("select * from customer where id = '$userId'");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,6 +25,22 @@ $fetch_user = $db_handle->runQuery("select * from customer where id = '$userId'"
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link href="assets/js/toastr/css/toastr.min.css" rel="stylesheet" type="text/css"/>
     <script src="assets/js/custom.js"></script>
+    <style>
+        .card {
+            margin: 5%;
+            flex-direction: row;
+        }
+        .card-body {
+            padding: 0.5em 1em;
+        }
+        .card1.card img {
+            max-width: 6em;
+            height: 100%;
+            border-bottom-left-radius: calc(0.25rem - 1px);
+            border-top-left-radius: calc(0.25rem - 1px);
+            margin-right: 22px;
+        }
+    </style>
 </head>
 <body class="home-body">
 <div class="navbar">
@@ -69,11 +84,66 @@ $fetch_user = $db_handle->runQuery("select * from customer where id = '$userId'"
                 dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas </p>
         </div>
     </div>
+
+</div>
+
+<div class="container-fluid mt-5 price-section">
+    <div class="row text-center pt-3">
+        <img class="img-fluid" src="assets/images/price/title.webp">
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <a href="payment.php?price=39.99" style="text-decoration: none;">
+                    <div class="card1 card align-items-center" style="max-width: 540px;">
+                        <div class="card-body">
+                            <h5 class="price-quantity">5 夾</h5>
+                            <p class="price-details">HK$ 39.99</p>
+                        </div>
+                        <img src="assets/images/price/1.webp" alt="">
+                    </div>
+                </a>
+            </div>
+            <div class="col-12">
+                <a href="payment.php?price=69.99" style="text-decoration: none;">
+                    <div class="card1 card align-items-center" style="max-width: 540px;">
+                        <div class="card-body">
+                            <h5 class="price-quantity">10 夾</h5>
+                            <p class="price-details">HK$ 69.99</p>
+                        </div>
+                        <img src="assets/images/price/1.webp" alt="">
+                    </div>
+                </a>
+            </div>
+            <div class="col-12">
+                <a href="payment.php?price=179.99" style="text-decoration: none;">
+                    <div class="card1 card align-items-center" style="max-width: 540px;">
+                        <div class="card-body">
+                            <h5 class="price-quantity">30 夾</h5>
+                            <p class="price-details">HK$ 179.99</p>
+                        </div>
+                        <img src="assets/images/price/1.webp" alt="">
+                    </div>
+                </a>
+            </div>
+            <div class="col-12">
+                <a href="payment.php?price=249.99" style="text-decoration: none;">
+                    <div class="card1 card align-items-center" style="max-width: 540px;">
+                        <div class="card-body">
+                            <h5 class="price-quantity">50 夾</h5>
+                            <p class="price-details">HK$ 249.99</p>
+                        </div>
+                        <img src="assets/images/price/1.webp" alt="">
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
     <div class="row before-footer">
 
     </div>
-
 </div>
+
 
 <script src="assets/js/jQuery/jquery-3.6.4.min.js"></script>
 <script src="assets/js/toastr/js/toastr.min.js" type="text/javascript"></script>

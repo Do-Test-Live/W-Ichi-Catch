@@ -34,6 +34,11 @@
 }
 
 @font-face {
+    font-family: Noto-Black;
+    src: url('../fonts/NotoSans-Black.otf');
+}
+
+@font-face {
     font-family: Xxx;
     src: url('../fonts/XXIX.otf');
 }
@@ -128,6 +133,7 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    z-index: 999;
 }
 
 .icon {
@@ -301,4 +307,35 @@
     position: relative;
     font-family: DMSans-M, sans-serif;
     margin-right: -10px;
+}
+
+.price-section{
+    background-image: url("../images/price/bg.webp");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.card1{
+    background-image: url("../images/price/btn.webp");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent !important;
+    border: none !important;
+}
+
+.price-quantity{
+    font-family: Noto-Bold, sans-serif;
+    color: #370256;
+    font-size: 35px;
+    margin-left: 70px;
+    margin-top: 20px;
+}
+
+.price-details{
+    font-family: Noto-Black, sans-serif;
+    color: #a916ff;
+    font-size: 23px;
+    padding-left: 27px
 }
