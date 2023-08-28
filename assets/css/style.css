@@ -165,12 +165,14 @@
 }
 
 .grab-btn {
-    background-image: url("../images/homepage/grab-button.webp");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
     width: 120px;
     height: 80px;
+    background: #ff9342;
+    border: 5px solid #e3e3e3;
+    border-radius: 20px;
+    color: #ffffff;
+    font-family: Xxx, sans-serif;
+    font-size: 22px;
 }
 .grab {
     background-image: url("../images/homepage/grab.webp");
@@ -180,7 +182,7 @@
     width: 120px;
     height: 80px;
     margin-top: 80px;
-    font-family: Noto-Bold, sans-serif;
+    font-family: Xxx, sans-serif;
     color: #5d4ba8;
     font-size: 20px;
 }
@@ -349,4 +351,17 @@
     color: #a916ff;
     font-size: 23px;
     padding-left: 27px
+}
+
+.modal-content {
+    background-image: url('../images/homepage/modal-bg.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 670px;
+    background-color: transparent;
+    border: none;
+}
+
+.modal{
+    background: #00000094 !important;
 }

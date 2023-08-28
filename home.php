@@ -8,6 +8,8 @@ if(isset($_SESSION['userid'])){
     $userId = $_SESSION['userid'];
     $fetch_user = $db_handle->runQuery("select * from customer where id = '$userId'");
 }
+
+$fetch_pro = $db_handle->runQuery("SELECT * FROM `gifts`");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -71,11 +73,51 @@ if(isset($_SESSION['userid'])){
             <img src="assets/images/homepage/img01.png" class="img-fluid">
         </div>
     </div>
+    <div class="mx-auto text-center mt-5" style="max-width: 550px; display: none;">
+        <div class="square border" data-probability="<?php echo (float)($fetch_pro[0]['gift1']/100); ?>" id="id1">
+            <div class="textArea">Choose Me</div>
+            <div class="textArea2">Gift 1</div>
+        </div>
+        <div class="square border" data-probability="<?php echo (float)($fetch_pro[0]['gift2']/100); ?>">
+            <div class="textArea">Choose Me</div>
+            <div class="textArea2">Gift 2</div>
+        </div>
+        <div class="square border" data-probability="<?php echo (float)($fetch_pro[0]['gift3']/100); ?>">
+            <div class="textArea">Choose Me</div>
+            <div class="textArea2">Gift 3</div>
+        </div>
+        <div class="square border" data-probability="<?php echo (float)($fetch_pro[0]['gift4']/100); ?>">
+            <div class="textArea">Choose Me</div>
+            <div class="textArea2">Gift 4</div>
+        </div>
+        <div class="square border" data-probability="<?php echo (float)($fetch_pro[0]['gift5']/100); ?>">
+            <div class="textArea">Choose Me</div>
+            <div class="textArea2">Gift 5</div>
+        </div>
+        <div class="square border" data-probability="<?php echo (float)($fetch_pro[0]['gift6']/100); ?>">
+            <div class="textArea">Choose Me</div>
+            <div class="textArea2">Gift 6</div>
+        </div>
+        <div class="square border" data-probability="<?php echo (float)($fetch_pro[0]['gift7']/100); ?>">
+            <div class="textArea">Choose Me</div>
+            <div class="textArea2">Gift 7</div>
+        </div>
+        <div class="square border" data-probability="<?php echo (float)($fetch_pro[0]['gift8']/100); ?>">
+            <div class="textArea">Choose Me</div>
+            <div class="textArea2">Gift 8</div>
+        </div>
+        <div class="square border" data-probability="<?php echo (float)($fetch_pro[0]['gift9']/100); ?>">
+            <div class="textArea">Choose Me</div>
+            <div class="textArea2">Gift 9</div>
+        </div>
+
+        <div id="drawContent"></div>
+    </div>
     <div class="row flex align-items-center justify-content-center" style="margin-top: -150px;">
-        <button class="btn grab-btn"></button>
+        <button class="btn grab-btn" id="playbutton">GRAB</button>
     </div>
     <div class="row flex align-items-center justify-content-center" style="margin-top: -90px;">
-        <button class="btn grab"><?php
+        <button class="btn grab" id="grab-value"><?php
             if(isset($_SESSION['userid'])){
                 $fetch_grab = $db_handle->runQuery("SELECT * FROM `grab` WHERE customer_id = '$userId'");
                 $no_fetch_grab = $db_handle->numRows("SELECT * FROM `grab` WHERE customer_id = '$userId'");
@@ -98,6 +140,8 @@ if(isset($_SESSION['userid'])){
     </div>
 
 </div>
+
+
 
 <div class="container-fluid mt-5 price-section">
     <div class="row text-center pt-3">
@@ -155,12 +199,101 @@ if(isset($_SESSION['userid'])){
 
     </div>
 </div>
+<div class="modal" tabindex="-1" id="modal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content d-flex align-items-center justify-content-center">
+            <div class="modal-body text-center" style="margin-top: 200px;">
+                <img src="assets/images/price/modal-image.png" alt="Winning Prize" style="height: 250px; width: 250px;">
+                <div class="row mt-5">
+                    <div class="col-12">
+                        <button type="button" class="btn grab-btn" id="claim">Claim</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <script src="assets/js/jQuery/jquery-3.6.4.min.js"></script>
 <script src="assets/js/toastr/js/toastr.min.js" type="text/javascript"></script>
 <script src="assets/js/toastr-init.js" type="text/javascript"></script>
 <script src="assets/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    var data = ['Ipad', 'Gift 1', 'Gift 2', 'Gift 3', 'Gift 4', 'Gift 5', 'Gift 6', 'Gift 7', 'Gift 8', 'Gift 9'];
+    var selectedDataValue; // Variable to store selected data value
+    const slices = document.getElementsByClassName('square');
+
+    for (i = 0; i < data.length; i++) {
+        $(".square:nth-child(" + i + ") .textArea:nth-child(2)").text(data[i]);
+    }
+
+    var timer = null;
+    playbutton.onclick = playRandom;
+
+    function playRandom() {
+        var playbutton = document.getElementById('playbutton');
+        clearInterval(timer);
+
+        timer = setInterval(function () {
+            let totalProbability = 0;
+
+            // Use a traditional for loop to iterate through the HTMLCollection
+            for (let i = 0; i < slices.length; i++) {
+                const probability = parseFloat(slices[i].getAttribute('data-probability'));
+                totalProbability += probability;
+            }
+
+            const random = Math.random() * totalProbability;
+            let accumulatedProbability = 0;
+            let selectedIndex = -1;
+
+            // Find the selected index based on the accumulated probability
+            for (let i = 0; i < slices.length; i++) {
+                const probability = parseFloat(slices[i].getAttribute('data-probability'));
+                accumulatedProbability += probability;
+                if (random <= accumulatedProbability) {
+                    selectedIndex = i;
+                    break;
+                }
+            }
+
+            selectedDataValue = data[selectedIndex + 1]; // Store selected data value
+            $(".square:nth-child(" + (selectedIndex + 1) + ")").css("background", "#ffd386");
+            $(".square:not(:nth-child(" + (selectedIndex + 1) + "))").css("background", "#f58879");
+            playbutton.style.background = '#989898';
+            playbutton.innerText = 'Loading';
+        }, 30);
+
+        playbutton.style.background = '#ff9342';
+        playbutton.innerText = 'GRAB';
+
+        // Automatically stop after 5 seconds
+        setTimeout(function () {
+            stopFun();
+        }, 2000);
+    }
+
+    function stopFun() {
+        clearInterval(timer);
+        var modal = document.getElementById('modal');
+        var claim = document.getElementById('claim');
+        var point = document.getElementById('grab-value');
+        let no = point.innerText;
+        no -= 1;
+        point.innerText = no;
+        modal.style.display = 'block';
+        var playbutton = document.getElementById('playbutton');
+        playbutton.style.background = '#ff9342';
+        playbutton.innerText = 'GRAB';
+        console.log(selectedDataValue);
+        claim.onclick = function() {
+            modal.style.display = 'none';
+        };
+
+    }
+</script>
 
 </body>
 </html>
