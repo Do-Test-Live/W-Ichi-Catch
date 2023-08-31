@@ -67,7 +67,7 @@ if(isset($_POST['signup'])){
                 <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Full Name" name="name" required>
             </div>
             <div class="mb-3">
-                <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Email or Usename" name="email" required>
+                <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Email" name="email" required>
             </div>
             <div class="mb-3">
                 <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Contact Number" name="number" required>

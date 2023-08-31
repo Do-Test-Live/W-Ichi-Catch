@@ -3,17 +3,17 @@ class DBController {
     private $host = "localhost";
     private $user = "root";
     private $password = "";
-    private $database = "ichicatcher";
+    private $database = "ichicatchereco";
     private $from_email='business@ichicatcher.com';
     private $notification_email='mingowhk@gmail.com';
     private $conn;
 
     function __construct() {
-        if($_SERVER['SERVER_NAME']=="www.ichicatch.ngt.hk"||$_SERVER['SERVER_NAME']=="ichicatch.ngt.hk"){
+        if($_SERVER['SERVER_NAME']=="www.ichi-catcher.com"||$_SERVER['SERVER_NAME']=="ichi-catcher.com"){
             $this->host = "localhost";
-            $this->user = "uamwhmiilubhs";
-            $this->password = "3}33m1^$@$b$";
-            $this->database = "dbnc14kslqwk4b";
+            $this->user = "u8jqlg31nsino";
+            $this->password = "7gn2]5ugb#^X";
+            $this->database = "dbffgkluzzgs33";
         }
 
         $this->conn = $this->connectDB();

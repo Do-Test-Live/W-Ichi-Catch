@@ -10,6 +10,25 @@ if(isset($_SESSION['userid'])){
 }
 
 $fetch_pro = $db_handle->runQuery("SELECT * FROM `gifts`");
+
+
+$data = ['ipad']; // Initialize the array with 'ipad'
+$fetch_gift = $db_handle->runQuery("SELECT * FROM gift_list");
+$no_fetch_gift = $db_handle->numRows("SELECT * FROM gift_list");
+
+for ($i = 0; $i < $no_fetch_gift; $i++) {
+    $data[] = $fetch_gift[$i]['gift_title']; // Add other values to the array
+    $image[] = $fetch_gift[$i]['gift_image'];
+}
+
+// Use the $data array directly
+$commaSeparated = $data;
+$images = $image;
+
+// Convert the PHP array to JSON format
+$data_json = json_encode($commaSeparated);
+$gift_image = json_encode($images);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -203,7 +222,8 @@ $fetch_pro = $db_handle->runQuery("SELECT * FROM `gifts`");
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content d-flex align-items-center justify-content-center">
             <div class="modal-body text-center" style="margin-top: 200px;">
-                <img src="assets/images/price/modal-image.png" alt="Winning Prize" style="height: 250px; width: 250px;">
+                <h4 class="text-white" id="gift-name" style="font-family: Xxx, sans-serif"></h4>
+                <img src="" alt="Winning Prize" style="height: 250px; width: 250px;" id="gift-image">
                 <div class="row mt-5">
                     <div class="col-12">
                         <button type="button" class="btn grab-btn" id="claim">Claim</button>
@@ -221,12 +241,14 @@ $fetch_pro = $db_handle->runQuery("SELECT * FROM `gifts`");
 <script src="assets/js/bootstrap.bundle.min.js"></script>
 
 <script>
-    var data = ['Ipad', 'Gift 1', 'Gift 2', 'Gift 3', 'Gift 4', 'Gift 5', 'Gift 6', 'Gift 7', 'Gift 8', 'Gift 9'];
-    var selectedDataValue; // Variable to store selected data value
+    var data = <?php echo $data_json; ?>;
+    let image = <?php echo $gift_image;?>;
+    console.log (image);
+    var selectedDataValue = -1;
     const slices = document.getElementsByClassName('square');
 
     for (i = 0; i < data.length; i++) {
-        $(".square:nth-child(" + i + ") .textArea:nth-child(2)").text(data[i]);
+        $(".square:nth-child(" + (i + 1) + ") .textArea").text(data[i]);
     }
 
     var timer = null;
@@ -239,7 +261,6 @@ $fetch_pro = $db_handle->runQuery("SELECT * FROM `gifts`");
         timer = setInterval(function () {
             let totalProbability = 0;
 
-            // Use a traditional for loop to iterate through the HTMLCollection
             for (let i = 0; i < slices.length; i++) {
                 const probability = parseFloat(slices[i].getAttribute('data-probability'));
                 totalProbability += probability;
@@ -249,7 +270,6 @@ $fetch_pro = $db_handle->runQuery("SELECT * FROM `gifts`");
             let accumulatedProbability = 0;
             let selectedIndex = -1;
 
-            // Find the selected index based on the accumulated probability
             for (let i = 0; i < slices.length; i++) {
                 const probability = parseFloat(slices[i].getAttribute('data-probability'));
                 accumulatedProbability += probability;
@@ -259,9 +279,9 @@ $fetch_pro = $db_handle->runQuery("SELECT * FROM `gifts`");
                 }
             }
 
-            selectedDataValue = data[selectedIndex + 1]; // Store selected data value
+            selectedDataValue = selectedIndex + 1; // Store selected index
+            $(".square").css("background", "#f58879"); // Reset all backgrounds
             $(".square:nth-child(" + (selectedIndex + 1) + ")").css("background", "#ffd386");
-            $(".square:not(:nth-child(" + (selectedIndex + 1) + "))").css("background", "#f58879");
             playbutton.style.background = '#989898';
             playbutton.innerText = 'Loading';
         }, 30);
@@ -269,7 +289,6 @@ $fetch_pro = $db_handle->runQuery("SELECT * FROM `gifts`");
         playbutton.style.background = '#ff9342';
         playbutton.innerText = 'GRAB';
 
-        // Automatically stop after 5 seconds
         setTimeout(function () {
             stopFun();
         }, 2000);
@@ -280,6 +299,8 @@ $fetch_pro = $db_handle->runQuery("SELECT * FROM `gifts`");
         var modal = document.getElementById('modal');
         var claim = document.getElementById('claim');
         var point = document.getElementById('grab-value');
+        var giftName = document.getElementById('gift-name');
+        var giftImage = document.getElementById('gift-image');
         let no = point.innerText;
         no -= 1;
         point.innerText = no;
@@ -287,13 +308,23 @@ $fetch_pro = $db_handle->runQuery("SELECT * FROM `gifts`");
         var playbutton = document.getElementById('playbutton');
         playbutton.style.background = '#ff9342';
         playbutton.innerText = 'GRAB';
-        console.log(selectedDataValue);
+
+        if (selectedDataValue !== -1) {
+            console.log("Selected value:", data[selectedDataValue]); // Corrected index
+            giftName.innerText = data[selectedDataValue]; // Corrected index
+            giftImage.src = 'https://ichi-catcher.com/admin/' + image[selectedDataValue - 1]; // Corrected index
+            console.log(image[selectedDataValue - 1]); // Corrected index
+        } else {
+            console.log("No value selected.");
+        }
+
+
         claim.onclick = function() {
             modal.style.display = 'none';
         };
-
     }
 </script>
+
 
 </body>
 </html>
