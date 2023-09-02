@@ -24,6 +24,20 @@ if(isset($_POST['place_order'])){
             echo "<script>
                 window.location.href='https://payme.hsbc/ichicatcher';
                 </script>";
+        } if ($payment == 'fps'){
+            echo "
+            <script>
+            document.cookie = 'alert = 3;';
+            window.location.href = 'home.php?payment=fps';
+</script>
+            ";
+        }if ($payment == 'alipay'){
+            echo "
+            <script>
+            document.cookie = 'alert = 3;';
+            window.location.href = 'home.php?payment=alipay';
+</script>
+            ";
         }
     }
 }

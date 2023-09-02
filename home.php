@@ -4,10 +4,10 @@ require_once('include/dbController.php');
 $db_handle = new DBController();
 date_default_timezone_set("Asia/Hong_Kong");
 
-if(isset($_SESSION['userid'])){
+if (isset($_SESSION['userid'])) {
     $userId = $_SESSION['userid'];
     $fetch_user = $db_handle->runQuery("select * from customer where id = '$userId'");
-} else{
+} else {
     echo "
     <script>
     window.location.href = 'index.php';
@@ -34,6 +34,12 @@ $images = $image;
 $data_json = json_encode($commaSeparated);
 $gift_image = json_encode($images);
 
+
+if (isset($_GET['payment'])) {
+   if($_GET['payment'] == 'alipay'){
+   }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -56,9 +62,11 @@ $gift_image = json_encode($images);
             margin: 5%;
             flex-direction: row;
         }
+
         .card-body {
             padding: 0.5em 1em;
         }
+
         .card1.card img {
             max-width: 6em;
             height: 100%;
@@ -98,39 +106,39 @@ $gift_image = json_encode($images);
         </div>
     </div>
     <div class="mx-auto text-center mt-5" style="max-width: 550px; display: none;">
-        <div class="square border" data-probability="<?php echo (float)($fetch_pro[0]['gift1']/100); ?>" id="id1">
+        <div class="square border" data-probability="<?php echo (float)($fetch_pro[0]['gift1'] / 100); ?>" id="id1">
             <div class="textArea">Choose Me</div>
             <div class="textArea2">Gift 1</div>
         </div>
-        <div class="square border" data-probability="<?php echo (float)($fetch_pro[0]['gift2']/100); ?>">
+        <div class="square border" data-probability="<?php echo (float)($fetch_pro[0]['gift2'] / 100); ?>">
             <div class="textArea">Choose Me</div>
             <div class="textArea2">Gift 2</div>
         </div>
-        <div class="square border" data-probability="<?php echo (float)($fetch_pro[0]['gift3']/100); ?>">
+        <div class="square border" data-probability="<?php echo (float)($fetch_pro[0]['gift3'] / 100); ?>">
             <div class="textArea">Choose Me</div>
             <div class="textArea2">Gift 3</div>
         </div>
-        <div class="square border" data-probability="<?php echo (float)($fetch_pro[0]['gift4']/100); ?>">
+        <div class="square border" data-probability="<?php echo (float)($fetch_pro[0]['gift4'] / 100); ?>">
             <div class="textArea">Choose Me</div>
             <div class="textArea2">Gift 4</div>
         </div>
-        <div class="square border" data-probability="<?php echo (float)($fetch_pro[0]['gift5']/100); ?>">
+        <div class="square border" data-probability="<?php echo (float)($fetch_pro[0]['gift5'] / 100); ?>">
             <div class="textArea">Choose Me</div>
             <div class="textArea2">Gift 5</div>
         </div>
-        <div class="square border" data-probability="<?php echo (float)($fetch_pro[0]['gift6']/100); ?>">
+        <div class="square border" data-probability="<?php echo (float)($fetch_pro[0]['gift6'] / 100); ?>">
             <div class="textArea">Choose Me</div>
             <div class="textArea2">Gift 6</div>
         </div>
-        <div class="square border" data-probability="<?php echo (float)($fetch_pro[0]['gift7']/100); ?>">
+        <div class="square border" data-probability="<?php echo (float)($fetch_pro[0]['gift7'] / 100); ?>">
             <div class="textArea">Choose Me</div>
             <div class="textArea2">Gift 7</div>
         </div>
-        <div class="square border" data-probability="<?php echo (float)($fetch_pro[0]['gift8']/100); ?>">
+        <div class="square border" data-probability="<?php echo (float)($fetch_pro[0]['gift8'] / 100); ?>">
             <div class="textArea">Choose Me</div>
             <div class="textArea2">Gift 8</div>
         </div>
-        <div class="square border" data-probability="<?php echo (float)($fetch_pro[0]['gift9']/100); ?>">
+        <div class="square border" data-probability="<?php echo (float)($fetch_pro[0]['gift9'] / 100); ?>">
             <div class="textArea">Choose Me</div>
             <div class="textArea2">Gift 9</div>
         </div>
@@ -138,10 +146,10 @@ $gift_image = json_encode($images);
         <div id="drawContent"></div>
     </div>
     <?php
-    if(isset($_SESSION['userid'])){
+    if (isset($_SESSION['userid'])) {
         $fetch_grab = $db_handle->runQuery("SELECT * FROM `grab` WHERE customer_id = '$userId'");
         $no_fetch_grab = $db_handle->numRows("SELECT * FROM `grab` WHERE customer_id = '$userId'");
-        if($no_fetch_grab > 0){
+        if ($no_fetch_grab > 0) {
             $grab = $fetch_grab[0]['grab'];
         } else {
             $grab = 00;
@@ -149,10 +157,10 @@ $gift_image = json_encode($images);
     } else $grab = 00;
     ?>
     <div class="row flex align-items-center justify-content-center" style="margin-top: -150px;">
-        <button class="btn grab-btn" id="playbutton" <?php if($grab <=0) echo 'disabled'?>>GRAB</button>
+        <button class="btn grab-btn" id="playbutton" <?php if ($grab <= 0) echo 'disabled' ?>>GRAB</button>
     </div>
     <div class="row flex align-items-center justify-content-center" style="margin-top: -90px;">
-        <button class="btn grab" id="grab-value"><?php echo $grab;?></button>
+        <button class="btn grab" id="grab-value"><?php echo $grab; ?></button>
     </div>
     <div class="container home-text-section mt-3 pt-5 pb-5">
         <div class="col-12">
@@ -166,7 +174,6 @@ $gift_image = json_encode($images);
     </div>
 
 </div>
-
 
 
 <div class="container-fluid mt-5 price-section">
@@ -229,7 +236,7 @@ $gift_image = json_encode($images);
 <div class="modal" tabindex="-1" id="modal">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content d-flex align-items-center justify-content-center">
-            <div class="modal-body text-center" style="margin-top: 200px;">
+            <div class="modal-body text-center" style="margin-top: 150px;">
                 <h4 class="text-white" id="gift-name" style="font-family: Xxx, sans-serif"></h4>
                 <img src="" alt="Winning Prize" style="height: 250px; width: 250px;" id="gift-image">
                 <div class="row mt-5">
@@ -245,19 +252,22 @@ $gift_image = json_encode($images);
 <div class="modal" tabindex="-1" id="modal_payment" style="display: none;">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content d-flex align-items-center justify-content-center">
-            <div class="modal-body text-center" style="margin-top: 200px;">
+            <div class="modal-body text-center" style="margin-top: 150px;">
                 <h4 class="text-white" id="gift-name" style="font-family: Xxx, sans-serif">Select Payment Method</h4>
                 <form action="payment.php" method="post">
                     <input type="hidden" value="" id="amount" name="amount">
-                    <select class="dropdown" name="payment">
+                    <select class="dropdown" name="payment" required>
+                        <option value="" disabled selected>Choose Option</option>
                         <option value="payme">Payme</option>
                         <option value="fps">FPS</option>
                         <option value="alipay">Alipay</option>
                     </select>
                     <div class="row mt-5">
                         <div class="col-12">
-                            <button type="submit" name="place_order" class="btn grab-btn" id="claim">Claim</button>
-                            <button type="button" class="btn grab-btn" onclick="document.getElementById('modal_payment').style.display = 'none';">Close</button>
+                            <button type="submit" name="place_order" class="btn grab-btn" id="claim">Submit</button>
+                            <button type="button" class="btn grab-btn"
+                                    onclick="document.getElementById('modal_payment').style.display = 'none';">Close
+                            </button>
                         </div>
                     </div>
                 </form>
@@ -266,6 +276,60 @@ $gift_image = json_encode($images);
     </div>
 </div>
 
+
+
+<?php
+if (isset($_GET['payment'])) {
+    if($_GET['payment'] == 'alipay'){
+        ?>
+        <div class="modal" tabindex="-1" id="modal_alipay" style="display: block;">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content d-flex align-items-center justify-content-center" style="background-image: url('assets/images/gift22.png');">
+                    <div class="modal-body text-center" style="margin-top: 120px;">
+                        <h4 class="text-white" style="font-family: Xxx, sans-serif">AliPay</h4>
+                        <img src="assets/images/alipay.jpg" alt="Winning Prize" style="height: 250px; width: 250px;">
+                        <div class="row mt-5">
+                            <div class="col-12">
+                                <button type="button" class="btn grab-btn"
+                                        onclick="document.getElementById('modal_alipay').style.display = 'none';">Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php
+    }
+}
+?>
+
+
+<?php
+if (isset($_GET['payment'])) {
+    if($_GET['payment'] == 'fps'){
+        ?>
+        <div class="modal" tabindex="-1" id="modal_alipay" style="display: block;">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content d-flex align-items-center justify-content-center" style="background-image: url('assets/images/gift22.png');">
+                    <div class="modal-body text-center" style="margin-top: 120px;">
+                        <h4 class="text-white" style="font-family: Xxx, sans-serif">FPS</h4>
+                        <h4 class="text-white mt-3" style="font-family: Xxx, sans-serif">Number: +852 44020266</h4>
+                        <div class="row mt-5">
+                            <div class="col-12">
+                                <button type="button" class="btn grab-btn"
+                                        onclick="document.getElementById('modal_alipay').style.display = 'none';">Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php
+    }
+}
+?>
 
 
 <script src="assets/js/jQuery/jquery-3.6.4.min.js"></script>
@@ -331,7 +395,7 @@ $gift_image = json_encode($images);
         var xhr = new XMLHttpRequest();
         xhr.open('GET', 'query.php', true);
 
-        xhr.onload = function() {
+        xhr.onload = function () {
             if (xhr.status === 200) {
                 // Successful AJAX request, process the PHP response
                 var response = JSON.parse(xhr.responseText);
@@ -364,7 +428,7 @@ $gift_image = json_encode($images);
         let no = point.innerText;
         no -= 1;
         point.innerText = no;
-        if(no <= 0){
+        if (no <= 0) {
             playbutton.disabled = 'true';
         }
         modal.style.display = 'block';
@@ -381,13 +445,13 @@ $gift_image = json_encode($images);
             console.log("No value selected.");
         }
 
-        claim.onclick = function() {
+        claim.onclick = function () {
             // AJAX request to call the PHP file
             var xhr = new XMLHttpRequest();
             var url = 'claim_gift.php?data=' + encodeURIComponent(data[selectedDataValue]);
             xhr.open('GET', url, true);
 
-            xhr.onload = function() {
+            xhr.onload = function () {
                 if (xhr.status === 200) {
                     // Successful AJAX request, process the PHP response
                     var response = JSON.parse(xhr.responseText);
@@ -402,7 +466,7 @@ $gift_image = json_encode($images);
         };
     }
 
-    function openPaymentModal(a){
+    function openPaymentModal(a) {
         let paymentModal = document.getElementById('modal_payment');
         let amount = document.getElementById('amount');
         paymentModal.style.display = 'block';

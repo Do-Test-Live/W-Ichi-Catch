@@ -372,6 +372,11 @@
     padding: 10px;
     border: 2px solid #5d4ba8;
     border-radius: 10px;
+    font-family: Xxx, sans-serif;
+}
+
+.dropdown option{
+    font-family: Xxx, sans-serif;
 }
 .modal-dialog{
     margin: 20px !important;
