@@ -7,6 +7,11 @@ date_default_timezone_set("Asia/Hong_Kong");
 if(isset($_SESSION['userid'])){
     $userId = $_SESSION['userid'];
     $fetch_user = $db_handle->runQuery("select * from customer where id = '$userId'");
+} else{
+    echo "
+    <script>
+    window.location.href = 'index.php';
+</script>";
 }
 
 $fetch_pro = $db_handle->runQuery("SELECT * FROM `gifts`");
@@ -132,20 +137,22 @@ $gift_image = json_encode($images);
 
         <div id="drawContent"></div>
     </div>
+    <?php
+    if(isset($_SESSION['userid'])){
+        $fetch_grab = $db_handle->runQuery("SELECT * FROM `grab` WHERE customer_id = '$userId'");
+        $no_fetch_grab = $db_handle->numRows("SELECT * FROM `grab` WHERE customer_id = '$userId'");
+        if($no_fetch_grab > 0){
+            $grab = $fetch_grab[0]['grab'];
+        } else {
+            $grab = 00;
+        }
+    } else $grab = 00;
+    ?>
     <div class="row flex align-items-center justify-content-center" style="margin-top: -150px;">
-        <button class="btn grab-btn" id="playbutton">GRAB</button>
+        <button class="btn grab-btn" id="playbutton" <?php if($grab <=0) echo 'disabled'?>>GRAB</button>
     </div>
     <div class="row flex align-items-center justify-content-center" style="margin-top: -90px;">
-        <button class="btn grab" id="grab-value"><?php
-            if(isset($_SESSION['userid'])){
-                $fetch_grab = $db_handle->runQuery("SELECT * FROM `grab` WHERE customer_id = '$userId'");
-                $no_fetch_grab = $db_handle->numRows("SELECT * FROM `grab` WHERE customer_id = '$userId'");
-                if($no_fetch_grab > 0)
-                echo $fetch_grab[0]['grab'];
-                else
-                    echo '00';
-            } else echo '00';
-            ?></button>
+        <button class="btn grab" id="grab-value"><?php echo $grab;?></button>
     </div>
     <div class="container home-text-section mt-3 pt-5 pb-5">
         <div class="col-12">
@@ -169,7 +176,7 @@ $gift_image = json_encode($images);
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <a href="payment.php?price=39.99" style="text-decoration: none;">
+                <a onclick="openPaymentModal(39.99);" style="text-decoration: none;">
                     <div class="card1 card align-items-center" style="max-width: 540px;">
                         <div class="card-body">
                             <h5 class="price-quantity">5 夾</h5>
@@ -180,7 +187,7 @@ $gift_image = json_encode($images);
                 </a>
             </div>
             <div class="col-12">
-                <a href="payment.php?price=69.99" style="text-decoration: none;">
+                <a onclick="openPaymentModal(69.99);" style="text-decoration: none;">
                     <div class="card1 card align-items-center" style="max-width: 540px;">
                         <div class="card-body">
                             <h5 class="price-quantity">10 夾</h5>
@@ -191,7 +198,7 @@ $gift_image = json_encode($images);
                 </a>
             </div>
             <div class="col-12">
-                <a href="payment.php?price=179.99" style="text-decoration: none;">
+                <a onclick="openPaymentModal(179.99);" style="text-decoration: none;">
                     <div class="card1 card align-items-center" style="max-width: 540px;">
                         <div class="card-body">
                             <h5 class="price-quantity">30 夾</h5>
@@ -202,7 +209,7 @@ $gift_image = json_encode($images);
                 </a>
             </div>
             <div class="col-12">
-                <a href="payment.php?price=249.99" style="text-decoration: none;">
+                <a onclick="openPaymentModal(249.99);" style="text-decoration: none;">
                     <div class="card1 card align-items-center" style="max-width: 540px;">
                         <div class="card-body">
                             <h5 class="price-quantity">50 夾</h5>
@@ -214,6 +221,7 @@ $gift_image = json_encode($images);
             </div>
         </div>
     </div>
+
     <div class="row before-footer">
 
     </div>
@@ -234,6 +242,31 @@ $gift_image = json_encode($images);
     </div>
 </div>
 
+<div class="modal" tabindex="-1" id="modal_payment" style="display: none;">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content d-flex align-items-center justify-content-center">
+            <div class="modal-body text-center" style="margin-top: 200px;">
+                <h4 class="text-white" id="gift-name" style="font-family: Xxx, sans-serif">Select Payment Method</h4>
+                <form action="payment.php" method="post">
+                    <input type="hidden" value="" id="amount" name="amount">
+                    <select class="dropdown" name="payment">
+                        <option value="payme">Payme</option>
+                        <option value="fps">FPS</option>
+                        <option value="alipay">Alipay</option>
+                    </select>
+                    <div class="row mt-5">
+                        <div class="col-12">
+                            <button type="submit" name="place_order" class="btn grab-btn" id="claim">Claim</button>
+                            <button type="button" class="btn grab-btn" onclick="document.getElementById('modal_payment').style.display = 'none';">Close</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 <script src="assets/js/jQuery/jquery-3.6.4.min.js"></script>
 <script src="assets/js/toastr/js/toastr.min.js" type="text/javascript"></script>
@@ -243,7 +276,6 @@ $gift_image = json_encode($images);
 <script>
     var data = <?php echo $data_json; ?>;
     let image = <?php echo $gift_image;?>;
-    console.log (image);
     var selectedDataValue = -1;
     const slices = document.getElementsByClassName('square');
 
@@ -295,15 +327,46 @@ $gift_image = json_encode($images);
     }
 
     function stopFun() {
+        // AJAX request to call the PHP file
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'query.php', true);
+
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                // Successful AJAX request, process the PHP response
+                var response = JSON.parse(xhr.responseText);
+
+                if (response.success) {
+                    // The PHP query was executed successfully
+                    continueWithQueryResult();
+                } else {
+                    // The PHP query failed
+                    console.error('PHP query execution failed');
+                }
+            } else {
+                // Error handling for AJAX request
+                console.error('AJAX request failed');
+            }
+        };
+
+        xhr.send();
+    }
+
+    function continueWithQueryResult() {
+        // Rest of your code
         clearInterval(timer);
         var modal = document.getElementById('modal');
         var claim = document.getElementById('claim');
         var point = document.getElementById('grab-value');
         var giftName = document.getElementById('gift-name');
         var giftImage = document.getElementById('gift-image');
+        var playbutton = document.getElementById('playbutton');
         let no = point.innerText;
         no -= 1;
         point.innerText = no;
+        if(no <= 0){
+            playbutton.disabled = 'true';
+        }
         modal.style.display = 'block';
         var playbutton = document.getElementById('playbutton');
         playbutton.style.background = '#ff9342';
@@ -318,10 +381,32 @@ $gift_image = json_encode($images);
             console.log("No value selected.");
         }
 
-
         claim.onclick = function() {
-            modal.style.display = 'none';
+            // AJAX request to call the PHP file
+            var xhr = new XMLHttpRequest();
+            var url = 'claim_gift.php?data=' + encodeURIComponent(data[selectedDataValue]);
+            xhr.open('GET', url, true);
+
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    // Successful AJAX request, process the PHP response
+                    var response = JSON.parse(xhr.responseText);
+                    if (response.success) {
+                        // The PHP query was executed successfully
+                        modal.style.display = 'none';
+                    }
+                }
+            };
+            xhr.send();
+
         };
+    }
+
+    function openPaymentModal(a){
+        let paymentModal = document.getElementById('modal_payment');
+        let amount = document.getElementById('amount');
+        paymentModal.style.display = 'block';
+        amount.value = a;
     }
 </script>
 

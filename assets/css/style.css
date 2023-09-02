@@ -365,3 +365,14 @@
 .modal{
     background: #00000094 !important;
 }
+
+.dropdown{
+    width: 100%;
+    background: #ff9342;
+    padding: 10px;
+    border: 2px solid #5d4ba8;
+    border-radius: 10px;
+}
+.modal-dialog{
+    margin: 20px !important;
+}
