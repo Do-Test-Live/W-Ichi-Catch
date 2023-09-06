@@ -9,7 +9,7 @@ class DBController {
     private $conn;
 
     function __construct() {
-        if($_SERVER['SERVER_NAME']=="www.ichi-catcher.com"||$_SERVER['SERVER_NAME']=="ichi-catcher.com"){
+        if($_SERVER['SERVER_NAME']=="www.probability.ichi-catcher.com"||$_SERVER['SERVER_NAME']=="probability.ichi-catcher.com"){
             $this->host = "localhost";
             $this->user = "u8jqlg31nsino";
             $this->password = "7gn2]5ugb#^X";
