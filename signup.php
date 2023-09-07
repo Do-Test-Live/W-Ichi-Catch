@@ -73,7 +73,7 @@ if(isset($_POST['signup'])){
                 <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Contact Number" name="number" required>
             </div>
             <div class="mb-3">
-                <input type="password" class="form-control" aria-describedby="emailHelp" name="password" required>
+                <input type="password" class="form-control" aria-describedby="emailHelp" name="password" placeholder="Password" required>
             </div>
             <div class="row mt-3">
                 <button type="submit" name="signup" class="btn"><img src="assets/images/login/create-account.webp" class="img-fluid">
