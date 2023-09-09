@@ -10,7 +10,7 @@ if (isset($_SESSION['userid'])) {
 } else {
     echo "
     <script>
-    window.location.href = 'index.php';</script>";
+    window.location.href = 'login.php';</script>";
 }
 
 $gift = $_GET['data'];

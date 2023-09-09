@@ -5,5 +5,5 @@ session_unset();
 
 echo "<script>
                 document.cookie = 'alert = 2;';
-                window.location.href='index.php';
+                window.location.href='login.php';
                 </script>";

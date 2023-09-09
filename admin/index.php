@@ -20,7 +20,7 @@ if(isset($_POST['update_pro'])){
     if($update){
         echo "<script>
 alert('Data Updated Successfully!');
-window.location.href = 'index.php';
+window.location.href = 'login.php';
 </script>";
     }
 }

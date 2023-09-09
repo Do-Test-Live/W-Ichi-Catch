@@ -22,7 +22,7 @@ if(isset($_POST['signup'])){
             echo "
         <script>
         alert('Account Created Successfully!');
-        window.location.href = 'home.php';
+        window.location.href = 'index.php';
 </script>
         ";
         }
@@ -87,7 +87,7 @@ if(isset($_POST['signup'])){
                 </div>
             </div>
             <div class="row">
-                <a href="index.php" class="btn" name="login"><img src="assets/images/login/login-button.webp" class="img-fluid">
+                <a href="login.php" class="btn" name="login"><img src="assets/images/login/login-button.webp" class="img-fluid">
                 </a>
             </div>
         </form>

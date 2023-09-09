@@ -9,7 +9,7 @@ if (isset($_SESSION['userid'])) {
 } else{
     echo "
     <script>
-    window.location.href = 'index.php';
+    window.location.href = 'login.php';
 </script>";
 }
 
@@ -28,14 +28,14 @@ if(isset($_POST['place_order'])){
             echo "
             <script>
             document.cookie = 'alert = 3;';
-            window.location.href = 'home.php?payment=fps';
+            window.location.href = 'index.php?payment=fps';
 </script>
             ";
         }if ($payment == 'alipay'){
             echo "
             <script>
             document.cookie = 'alert = 3;';
-            window.location.href = 'home.php?payment=alipay';
+            window.location.href = 'index.php?payment=alipay';
 </script>
             ";
         }
