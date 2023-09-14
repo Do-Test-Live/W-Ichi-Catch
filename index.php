@@ -31,8 +31,8 @@ $gift_image = json_encode($images);
 
 
 if (isset($_GET['payment'])) {
-   if($_GET['payment'] == 'alipay'){
-   }
+    if ($_GET['payment'] == 'alipay') {
+    }
 }
 
 ?>
@@ -159,12 +159,8 @@ if (isset($_GET['payment'])) {
     </div>
     <div class="container home-text-section mt-3 pt-5 pb-5">
         <div class="col-12">
-            <h2>Lorem ipsum dolor</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan
-                lacus vel facilisis. </p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas </p>
+            <h2>歡迎來到Ichi-Catcher</h2>
+            <p>首個線上抽夾公仔的奇妙世界！這是一種刺激又令人著迷的抽獎體驗，讓你有機會抽取到各種驚喜模型和產品。不同於傳統的夾公仔購買方式，線上抽「夾公仔」遊戲讓你隨時隨地參與，無需等待排隊或走遍商店。 </p>
         </div>
     </div>
 
@@ -178,7 +174,9 @@ if (isset($_GET['payment'])) {
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <a onclick="<?php if(isset($_SESSION['userid'])) {?>openPaymentModal(39.99);<?php } else {echo "window.location.href = 'login.php'";}?>" style="text-decoration: none;">
+                <a onclick="<?php if (isset($_SESSION['userid'])) { ?>openPaymentModal(39.99);<?php } else {
+                    echo "window.location.href = 'login.php'";
+                } ?>" style="text-decoration: none;">
                     <div class="card1 card align-items-center" style="max-width: 540px;">
                         <div class="card-body">
                             <h5 class="price-quantity">5 夾</h5>
@@ -189,7 +187,9 @@ if (isset($_GET['payment'])) {
                 </a>
             </div>
             <div class="col-12">
-                <a onclick="<?php if(isset($_SESSION['userid'])) {?>openPaymentModal(69.99);<?php } else {echo "window.location.href = 'login.php'";}?>" style="text-decoration: none;">
+                <a onclick="<?php if (isset($_SESSION['userid'])) { ?>openPaymentModal(69.99);<?php } else {
+                    echo "window.location.href = 'login.php'";
+                } ?>" style="text-decoration: none;">
                     <div class="card1 card align-items-center" style="max-width: 540px;">
                         <div class="card-body">
                             <h5 class="price-quantity">10 夾</h5>
@@ -200,7 +200,9 @@ if (isset($_GET['payment'])) {
                 </a>
             </div>
             <div class="col-12">
-                <a onclick="<?php if(isset($_SESSION['userid'])) {?>openPaymentModal(179.99);<?php } else {echo "window.location.href = 'login.php'";}?>" style="text-decoration: none;">
+                <a onclick="<?php if (isset($_SESSION['userid'])) { ?>openPaymentModal(179.99);<?php } else {
+                    echo "window.location.href = 'login.php'";
+                } ?>" style="text-decoration: none;">
                     <div class="card1 card align-items-center" style="max-width: 540px;">
                         <div class="card-body">
                             <h5 class="price-quantity">30 夾</h5>
@@ -211,7 +213,9 @@ if (isset($_GET['payment'])) {
                 </a>
             </div>
             <div class="col-12">
-                <a onclick="<?php if(isset($_SESSION['userid'])) {?>openPaymentModal(249.99);<?php } else {echo "window.location.href = 'login.php'";}?>" style="text-decoration: none;">
+                <a onclick="<?php if (isset($_SESSION['userid'])) { ?>openPaymentModal(249.99);<?php } else {
+                    echo "window.location.href = 'login.php'";
+                } ?>" style="text-decoration: none;">
                     <div class="card1 card align-items-center" style="max-width: 540px;">
                         <div class="card-body">
                             <h5 class="price-quantity">50 夾</h5>
@@ -272,21 +276,21 @@ if (isset($_GET['payment'])) {
 </div>
 
 
-
 <?php
 if (isset($_GET['payment'])) {
-    if($_GET['payment'] == 'alipay'){
+    if ($_GET['payment'] == 'alipay') {
         ?>
         <div class="modal" tabindex="-1" id="modal_alipay" style="display: block;">
             <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content d-flex align-items-center justify-content-center" style="background-image: url('assets/images/gift22.png');">
+                <div class="modal-content d-flex align-items-center justify-content-center"
+                     style="background-image: url('assets/images/gift22.png');">
                     <div class="modal-body text-center" style="margin-top: 120px;">
                         <h4 class="text-white" style="font-family: Xxx, sans-serif">AliPay</h4>
                         <img src="assets/images/alipay.jpg" alt="Winning Prize" style="height: 250px; width: 250px;">
                         <div class="row mt-5">
                             <div class="col-12">
                                 <button type="button" class="btn grab-btn"
-                                        onclick="document.getElementById('modal_alipay').style.display = 'none';">Close
+                                        onclick="document.getElementById('modal_alipay').style.display = 'none'; window.location.href = 'index.php';">Close
                                 </button>
                             </div>
                         </div>
@@ -302,18 +306,19 @@ if (isset($_GET['payment'])) {
 
 <?php
 if (isset($_GET['payment'])) {
-    if($_GET['payment'] == 'fps'){
+    if ($_GET['payment'] == 'fps') {
         ?>
         <div class="modal" tabindex="-1" id="modal_alipay" style="display: block;">
             <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content d-flex align-items-center justify-content-center" style="background-image: url('assets/images/gift22.png');">
+                <div class="modal-content d-flex align-items-center justify-content-center"
+                     style="background-image: url('assets/images/gift22.png');">
                     <div class="modal-body text-center" style="margin-top: 120px;">
                         <h4 class="text-white" style="font-family: Xxx, sans-serif">FPS</h4>
                         <h4 class="text-white mt-3" style="font-family: Xxx, sans-serif">Number: +852 44020266</h4>
                         <div class="row mt-5">
                             <div class="col-12">
                                 <button type="button" class="btn grab-btn"
-                                        onclick="document.getElementById('modal_alipay').style.display = 'none';">Close
+                                        onclick="document.getElementById('modal_alipay').style.display = 'none';window.location.href = 'index.php'">Close
                                 </button>
                             </div>
                         </div>
@@ -422,7 +427,6 @@ if (isset($_GET['payment'])) {
         var playbutton = document.getElementById('playbutton');
         let no = point.innerText;
         no -= 1;
-        point.innerText = no;
         if (no <= 0) {
             playbutton.disabled = 'true';
         }
@@ -434,7 +438,7 @@ if (isset($_GET['payment'])) {
         if (selectedDataValue !== -1) {
             console.log("Selected value:", data[selectedDataValue]); // Corrected index
             giftName.innerText = data[selectedDataValue]; // Corrected index
-            giftImage.src = 'https://ichi-catcher.com/admin/' + image[selectedDataValue - 1]; // Corrected index
+            giftImage.src = 'https://ichi-catcher.com/shop/admin/' + image[selectedDataValue - 1]; // Corrected index
             console.log(image[selectedDataValue - 1]); // Corrected index
         } else {
             console.log("No value selected.");
@@ -453,6 +457,7 @@ if (isset($_GET['payment'])) {
                     if (response.success) {
                         // The PHP query was executed successfully
                         modal.style.display = 'none';
+                        window.location.href = 'index.php';
                     }
                 }
             };
