@@ -119,6 +119,16 @@
     padding: 0;
 }
 
+.home-gift {
+    background-image: url("../images/homepage/gift-copy.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
 .navbar {
     display: flex;
     justify-content: space-around;
@@ -362,6 +372,15 @@
     border: none;
 }
 
+.modal-content-gift {
+    background-image: url('../images/homepage/gift-copy.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 670px;
+    background-color: transparent;
+    border: none;
+}
+
 .modal{
     background: #00000094 !important;
 }
@@ -380,4 +399,18 @@
 }
 .modal-dialog{
     margin: 20px !important;
+}
+
+.text-gift-name{
+    font-size: 24px;
+    color: #604d9e;
+    font-weight: bold;
+    font-family: Arial,sans-serif;
+}
+
+.text-gift-percent{
+    font-size: 16px;
+    color: #604d9e;
+    font-weight: bold;
+    font-family: Arial,sans-serif;
 }

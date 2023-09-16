@@ -157,6 +157,11 @@ if (isset($_GET['payment'])) {
     <div class="row flex align-items-center justify-content-center" style="margin-top: -90px;">
         <button class="btn grab" id="grab-value"><?php echo $grab; ?></button>
     </div>
+    <div class="row mt-4">
+        <div class="col-12 text-center">
+            <button class="btn grab-btn mb-2" style="width: 140px" onclick="window.location.href='gift_list.php'">獎品詳情</button>
+        </div>
+    </div>
     <div class="container home-text-section mt-3 pt-5 pb-5">
         <div class="col-12">
             <h2>歡迎來到Ichi-Catcher</h2>
@@ -232,6 +237,8 @@ if (isset($_GET['payment'])) {
 
     </div>
 </div>
+
+
 <div class="modal" tabindex="-1" id="modal">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content d-flex align-items-center justify-content-center">
@@ -330,7 +337,6 @@ if (isset($_GET['payment'])) {
     }
 }
 ?>
-
 
 <script src="assets/js/jQuery/jquery-3.6.4.min.js"></script>
 <script src="assets/js/toastr/js/toastr.min.js" type="text/javascript"></script>
