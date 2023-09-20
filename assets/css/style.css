@@ -402,7 +402,7 @@
 }
 
 .text-gift-name{
-    font-size: 24px;
+    font-size: 14px;
     color: #604d9e;
     font-weight: bold;
     font-family: Arial,sans-serif;
@@ -413,4 +413,12 @@
     color: #604d9e;
     font-weight: bold;
     font-family: Arial,sans-serif;
+}
+
+.modal-img,.model-vid{
+    width:100%;
+    height:auto;
+}
+.modal-body{
+    padding:0px;
 }

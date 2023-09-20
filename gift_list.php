@@ -15,26 +15,6 @@ $fetch_pro = $db_handle->runQuery("SELECT * FROM `gifts`");
 $data = ['ipad']; // Initialize the array with 'ipad'
 $fetch_gift = $db_handle->runQuery("SELECT * FROM gift_list");
 $no_fetch_gift = $db_handle->numRows("SELECT * FROM gift_list");
-
-for ($i = 0; $i < $no_fetch_gift; $i++) {
-    $data[] = $fetch_gift[$i]['gift_title']; // Add other values to the array
-    $image[] = $fetch_gift[$i]['gift_image'];
-}
-
-// Use the $data array directly
-$commaSeparated = $data;
-$images = $image;
-
-// Convert the PHP array to JSON format
-$data_json = json_encode($commaSeparated);
-$gift_image = json_encode($images);
-
-
-if (isset($_GET['payment'])) {
-    if ($_GET['payment'] == 'alipay') {
-    }
-}
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -50,6 +30,7 @@ if (isset($_GET['payment'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
           integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.1/animate.min.css'><link rel="stylesheet" href="./style.css">
     <link href="assets/js/toastr/css/toastr.min.css" rel="stylesheet" type="text/css"/>
     <script src="assets/js/custom.js"></script>
     <style>
@@ -104,13 +85,34 @@ if (isset($_GET['payment'])) {
 
 
 </div>
+<div id="myModal" class="modal fade" role="dialog" style="background-color: #0000003d !important;">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content" style="background-image: none;">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
 
+            <div class="modal-body">
+            </div>
+        </div>
+    </div>
+</div>
 
 <script src="assets/js/jQuery/jquery-3.6.4.min.js"></script>
 <script src="assets/js/toastr/js/toastr.min.js" type="text/javascript"></script>
 <script src="assets/js/toastr-init.js" type="text/javascript"></script>
 <script src="assets/js/bootstrap.bundle.min.js"></script>
-
+<script>
+    $(document).ready(function(){
+        $("img").click(function(){
+            console.log('Image Clicked');
+            var t = $(this).attr("src");
+            $(".modal-body").html("<img src='"+t+"' class='modal-img'>");
+            $("#myModal").modal('show'); // Use .modal('show') to display the modal
+        });
+    });
+</script>
 
 </body>
 </html>
