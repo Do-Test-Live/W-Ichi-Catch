@@ -75,6 +75,12 @@ if(isset($_POST['signup'])){
             <div class="mb-3">
                 <input type="password" class="form-control" aria-describedby="emailHelp" name="password" placeholder="Password" required>
             </div>
+            <div class="mb-3">
+                <input class="form-check-input" style="padding: 7px;" type="checkbox" value="" id="flexCheckChecked" required>
+                <label class="form-check-label" for="flexCheckChecked">
+                    <a href="terms.php" style="text-decoration: none; color: #fff; font-weight: bold;">我已閱讀並同意使用者協議</a>
+                </label>
+            </div>
             <div class="row mt-3">
                 <button type="submit" name="signup" class="btn"><img src="assets/images/login/create-account.webp" class="img-fluid">
                 </button>
