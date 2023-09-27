@@ -55,10 +55,18 @@ $no_fetch_gift = $db_handle->numRows("SELECT * FROM gift_list");
 <body class="home-gift">
 <div class="navbar">
     <a href="index.php" class="icon"><i class="fa-solid fa-house"></i></a>
-    <a href="intro.html" class="icon"><i class="fa-solid fa-magnifying-glass"></i></a>
-    <a href="steps.html" class="center-icon"><img src="assets/images/homepage/add-button.png" alt="Icon 3"></a>
-    <a href="membership.html" class="icon"><i class="fa-solid fa-gamepad"></i></a>
-    <a href="login.php" class="icon"><i class="fa-solid fa-user"></i></a>
+    <a href="intro.php" class="icon"><i class="fa-solid fa-magnifying-glass"></i></a>
+    <a href="steps.php" class="center-icon"><img src="assets/images/homepage/add-button.png" alt="Icon 3"></a>
+    <a href="#" class="icon"><i class="fa-solid fa-gamepad"></i></a>
+    <?php if (isset($_SESSION['userid'])) {
+        ?>
+        <a href="profile.php" class="icon"><i class="fa-solid fa-user"></i></a>
+        <?php
+    } else {
+        ?>
+        <a href="login.php" class="icon"><i class="fa-solid fa-user"></i></a>
+        <?php
+    }?>
 </div>
 
 <div class="container" style="padding: 20px; margin-top: 80px; margin-bottom: 50px;">

@@ -1,3 +1,13 @@
+<?php
+session_start();
+require_once('include/dbController.php');
+$db_handle = new DBController();
+date_default_timezone_set("Asia/Hong_Kong");
+
+if (isset($_SESSION['userid'])) {
+    $userId = $_SESSION['userid'];
+    $fetch_user = $db_handle->runQuery("select * from customer where id = '$userId'");
+}?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,11 +26,19 @@
 </head>
 <body class="home-body">
 <div class="navbar">
-    <a href="home.html" class="icon"><i class="fa-solid fa-house"></i></a>
-    <a href="intro.html" class="icon"><i class="fa-solid fa-magnifying-glass"></i></a>
-    <a href="steps.html" class="center-icon"><img src="assets/images/homepage/add-button.png" alt="Icon 3"></a>
-    <a href="membership.html" class="icon"><i class="fa-solid fa-gamepad"></i></a>
-    <a href="index.html" class="icon"><i class="fa-solid fa-user"></i></a>
+    <a href="index.php" class="icon"><i class="fa-solid fa-house"></i></a>
+    <a href="intro.php" class="icon"><i class="fa-solid fa-magnifying-glass"></i></a>
+    <a href="steps.php" class="center-icon"><img src="assets/images/homepage/add-button.png" alt="Icon 3"></a>
+    <a href="#" class="icon"><i class="fa-solid fa-gamepad"></i></a>
+    <?php if (isset($_SESSION['userid'])) {
+        ?>
+    <a href="profile.php" class="icon"><i class="fa-solid fa-user"></i></a>
+    <?php
+    } else {
+        ?>
+    <a href="login.php" class="icon"><i class="fa-solid fa-user"></i></a>
+    <?php
+    }?>
 </div>
 
 <div class="container-fluid">

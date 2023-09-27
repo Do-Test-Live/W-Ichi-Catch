@@ -15,7 +15,7 @@ if (isset($_SESSION['userid'])) {
 
 $gift = $_GET['data'];
 
-if($gift == '+1 Claw'){
+if($gift == '+1 次機會'){
     $grab_number = $db_handle->runQuery("select * from grab where customer_id = '$userId'");
     $grab = $grab_number[0]['grab'] + 1;
     $update_grab = $db_handle->insertQuery("update grab set grab = '$grab' where customer_id = '$userId'");
