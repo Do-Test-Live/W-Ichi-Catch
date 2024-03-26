@@ -73,6 +73,8 @@ $no_fetch_gift = $db_handle->numRows("SELECT * FROM gift_list");
     <?php
     $fetch_gift = $db_handle->runQuery("select * from gift_list");
     $no_fetch_gift = $db_handle->numRows("select * from gift_list");
+    $gift = $db_handle->runQuery("select * from gifts");
+    $no_gift = $db_handle->numRows("select * from gifts");
     for ($i = 0; $i < $no_fetch_gift; $i++) {
         ?>
         <div class="row d-flex align-items-center justify-content-center text-center">
@@ -84,7 +86,35 @@ $no_fetch_gift = $db_handle->numRows("SELECT * FROM gift_list");
                      style="width: 100px">
             </div>
             <div class="col-4">
-                <p class="text-gift-percent"><?php echo $fetch_gift[$i]['percent']; ?>%</p>
+                <p class="text-gift-percent"><?php
+                    if($fetch_gift[$i]['id'] == '2'){
+                        echo $gift[0]['gift1'];
+                    }
+                    if($fetch_gift[$i]['id'] == '3'){
+                        echo $gift[0]['gift2'];
+                    }
+                    if($fetch_gift[$i]['id'] == '4'){
+                        echo $gift[0]['gift3'];
+                    }
+                    if($fetch_gift[$i]['id'] == '5'){
+                        echo $gift[0]['gift4'];
+                    }
+                    if($fetch_gift[$i]['id'] == '6'){
+                        echo $gift[0]['gift5'];
+                    }
+                    if($fetch_gift[$i]['id'] == '7'){
+                        echo $gift[0]['gift6'];
+                    }
+                    if($fetch_gift[$i]['id'] == '8'){
+                        echo $gift[0]['gift7'];
+                    }
+                    if($fetch_gift[$i]['id'] == '9'){
+                        echo $gift[0]['gift8'];
+                    }
+                    if($fetch_gift[$i]['id'] == '10'){
+                        echo $gift[0]['gift9'];
+                    }
+                    ?>%</p>
             </div>
         </div>
         <?php
