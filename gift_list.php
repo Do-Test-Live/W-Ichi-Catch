@@ -85,7 +85,10 @@ $no_fetch_gift = $db_handle->numRows("SELECT * FROM gift_list");
                 <img src="https://ichi-catcher.com/shop/admin/<?php echo $fetch_gift[$i]['gift_image']; ?>"
                      style="width: 100px">
             </div>
-            <div class="col-4">
+            <div class="col-2">
+                <p><?php echo $fetch_gift[$i]['id'];?></p>
+            </div>
+            <div class="col-2">
                 <p class="text-gift-percent"><?php
                     if($fetch_gift[$i]['id'] == '2'){
                         echo $gift[0]['gift1'];
